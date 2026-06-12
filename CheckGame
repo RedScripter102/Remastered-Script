@@ -2,6 +2,16 @@ local success, GamesData = pcall(function()
     return loadstring(game:HttpGet("https://raw.githubusercontent.com/RedScripter102/Remastered-Script/refs/heads/main/Gamelist"))()
 end)
 
+if not success then
+    warn("Failed to load script")
+    return
+end
+
+if typeof(GamesData) ~= "table" then
+    warn("Game list is not a table")
+    return
+end
+
 local FoundGameSupported = false
 
 for PlaceID, Execute in pairs(GamesData) do

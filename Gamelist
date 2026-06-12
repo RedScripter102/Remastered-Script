@@ -1,4 +1,3 @@
 local Games = {
-    [135887679143452] = "https://raw.githubusercontent.com/RedScripter102/Remastered-Script/refs/heads/main/Game%20Script/Excuse%20me%2C%20sir",
-    [2] = "" -- wip
+    [135887679143452] = "https://raw.githubusercontent.com/RedScripter102/Remastered-Script/refs/heads/main/Game%20Script/Excuse%20me%2C%20sir"
 }

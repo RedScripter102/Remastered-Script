@@ -1,16 +1,16 @@
-local success, Games = pcall(function()
+local success, GamesData = pcall(function()
     return loadstring(game:HttpGet("https://raw.githubusercontent.com/RedScripter102/Remastered-Script/refs/heads/main/Gamelist"))()
 end)
 
-if not success or type(Games) ~= "table" then
-    game:GetService("Players").LocalPlayer:Kick("Failed to load game list, try rejoin \n(if this show again then executor dont support)")
+if not success or type(GamesData) ~= "table" then
+    game:GetService("Players").LocalPlayer:Kick("Failed to load game list, try rejoin")
     return
 end
 
 local FoundGameSupported = false
 
-for PlaceID, Execute in pairs(Games) do
-    if PlaceID == game.PlaceId then
+for PlaceID, Execute in pairs(GamesData) do
+    if tonumber(PlaceID) == game.PlaceId then
         FoundGameSupported = true
         pcall(function()
             loadstring(game:HttpGet(Execute))()
@@ -20,9 +20,11 @@ for PlaceID, Execute in pairs(Games) do
 end
 
 if not FoundGameSupported then
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Exploit System",
-	Text = "[?] Game Not Supported.",
-	Icon = "rbxassetid://7734053426"
-})
+    pcall(function()
+        game:GetService("StarterGui"):SetCore("SendNotification",{
+            Title = "Exploit System",
+            Text = "[?] Game Not Supported.",
+            Icon = "rbxassetid://7734053426"
+        })
+    end)
 end

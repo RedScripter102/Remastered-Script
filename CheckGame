@@ -11,17 +11,17 @@ end
 
 local SupportedGames = {
     [135887679143452] = {
-        Name = "Excuse Me Sir",
+        Name = "Excuse Me, Sir",
         URL = "https://raw.githubusercontent.com/RedScripter102/Remastered-Script/refs/heads/main/GameScript/ExcuseMeSir.lua"
     },
 
     [123456789] = {
-        Name = "Example Game",
+        Name = "WIP",
         URL = "https://raw.githubusercontent.com/RedScripter102/Remastered-Script/refs/heads/main/GameScript/ExcuseMeSir.lua"
     },
 
     [987654321] = {
-        Name = "Game 3",
+        Name = "WIP",
         URL = "https://raw.githubusercontent.com/YourName/Repo/main/Game3.lua"
     },
 }
@@ -30,14 +30,14 @@ local PlaceId = game.PlaceId
 local GameData = SupportedGames[PlaceId]
 
 if GameData and GameData.URL then
-    Notify("Exploit System", "Loading " .. GameData.Name .. "...", 5)
+    Notify("Exploit System", "[" .. GameData.Name .. "] Game Supported!", 2)
 
     -- Load script directly (no success check)
     pcall(function()
         loadstring(game:HttpGet(GameData.URL))()
     end)
 
-    Notify("Exploit System", GameData.Name .. " loaded successfully!", 5)
+    Notify("Exploit System", "[" .. GameData.Name .. "] loaded successfully!", 3)
 else
-    Notify("Exploit System", "Game Not Supported.", 5)
+    Notify("Exploit System", "Game Not Supported", 5)
 end

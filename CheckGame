@@ -32,16 +32,12 @@ local GameData = SupportedGames[PlaceId]
 if GameData and GameData.URL then
     Notify("Exploit System", "Loading " .. GameData.Name .. "...", 5)
 
-    local success, err = pcall(function()
+    -- Load script directly (no success check)
+    pcall(function()
         loadstring(game:HttpGet(GameData.URL))()
     end)
 
-    if success then
-        Notify("Exploit System", GameData.Name .. " loaded successfully!", 5)
-    else
-        Notify("Exploit System", "Uh Oh! Something is wrong, Check console.", 8)
-        warn("Script Load Error: " .. tostring(err))  -- Helps you see the real error in F9 console
-    end
+    Notify("Exploit System", GameData.Name .. " loaded successfully!", 5)
 else
     Notify("Exploit System", "Game Not Supported.", 5)
 end

@@ -1,35 +1,46 @@
-local success, GamesData = pcall(function()
-    return loadstring(game:HttpGet("https://raw.githubusercontent.com/RedScripter102/Remastered-Script/refs/heads/main/Gamelist"))()
-end)
+local StarterGui = game:GetService("StarterGui")
 
-if not success then
-    warn("Failed to load script")
-    return
+local function Notify(title, text, duration)
+    StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Duration = duration or 5,
+        Icon = "rbxassetid://7734053426"
+    })
 end
 
-if typeof(GamesData) ~= "table" then
-    warn("Game list is not a table")
-    return
-end
+local SupportedGames = {
+    [135887679143452] = {
+        Name = "Excuse Me Sir",
+        URL = "https://raw.githubusercontent.com/RedScripter102/Remastered-Script/refs/heads/main/GameScript/ExcuseMeSir.lua"
+    },
 
-local FoundGameSupported = false
+    [123456789] = {
+        Name = "Wip",
+        URL = "https://raw.githubusercontent.com/RedScripter102/Remastered-Script/refs/heads/main/GameScript/ExcuseMeSir.lua"
+    },
 
-for PlaceID, Execute in pairs(GamesData) do
-    if tonumber(PlaceID) == game.PlaceId then
-        FoundGameSupported = true
-        pcall(function()
-            loadstring(game:HttpGet(Execute))()
-        end)
-        break
-    end
-end
+    [987654321] = {
+        Name = "Wip",
+        URL = "https://raw.githubusercontent.com/YourName/Repo/main/Game3.lua"
+    },
+}
 
-if not FoundGameSupported then
-    pcall(function()
-        game:GetService("StarterGui"):SetCore("SendNotification",{
-            Title = "Exploit System",
-            Text = "[?] Game Not Supported.",
-            Icon = "rbxassetid://7734053426"
-        })
+local PlaceId = game.PlaceId
+local GameData = SupportedGames[PlaceId]
+
+if GameData and GameData.URL then
+    Notify("Exploit System", "Loading " .. GameData.Name .. "...", 5)
+
+    local success = pcall(function()
+        loadstring(game:HttpGet(GameData.URL))()
     end)
+
+    if success then
+        Notify("Exploit System", GameData.Name .. " loaded successfully!", 5)
+    else
+        Notify("Exploit System", "Uh Oh! Something is wrong, Check console.", 8)
+    end
+else
+    Notify("Exploit System", "Game Not Supported.", 5)
 end
